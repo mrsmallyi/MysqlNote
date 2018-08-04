@@ -320,13 +320,13 @@ Master_SSL_Verify_Server_Cert: No
 
 防火墙开启3306端口
  
- *编辑$/etc/sysconfig/iptables$文件
+ * 编辑 **/etc/sysconfig/iptables** 文件
 
 ```
  vim /etc/sysconfig/iptables
 ```
 
- *发现真的没有添加3306端口进去，所以要起添加以下配置：
+ * 发现真的没有添加3306端口进去，所以要起添加以下配置：
 
 ```
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
@@ -334,58 +334,14 @@ Master_SSL_Verify_Server_Cert: No
 
 ![Alt text](./images/replica/20180804221133.png)
 
- *重启防火墙
+ * 重启防火墙
 ```
 # service iptables restart;
 ```
 
 ![Alt text](./images/replica/20180804221600.png)
 
-
-```
-mysql> SHOW SLAVE STATUS\G
-*************************** 1. row ***************************
-               Slave_IO_State: Waiting for master to send event
-                  Master_Host: 192.168.0.66
-                  Master_User: repl
-                  Master_Port: 3306
-                Connect_Retry: 60
-              Master_Log_File: mysql-bin.000004
-          Read_Master_Log_Pos: 106
-               Relay_Log_File: mysql-relay-bin.000003
-                Relay_Log_Pos: 251
-        Relay_Master_Log_File: mysql-bin.000003
-             Slave_IO_Running: Yes
-            Slave_SQL_Running: No
-              Replicate_Do_DB: 
-          Replicate_Ignore_DB: 
-           Replicate_Do_Table: 
-       Replicate_Ignore_Table: 
-      Replicate_Wild_Do_Table: 
-  Replicate_Wild_Ignore_Table: 
-                   Last_Errno: 1049
-                   Last_Error: Error 'Unknown database 'test'' on query. Default database: 'test'. Query: 'CREATE TABLE test_tb1 ( id int(11) primary key, name varchar(255) not null, sex tinyint(1) default 1 comment "1:男；0：女", age int(2) default 1 ) engine=innodb,charset=utf8'
-                 Skip_Counter: 0
-          Exec_Master_Log_Pos: 106
-              Relay_Log_Space: 1414
-              Until_Condition: None
-               Until_Log_File: 
-                Until_Log_Pos: 0
-           Master_SSL_Allowed: No
-           Master_SSL_CA_File: 
-           Master_SSL_CA_Path: 
-              Master_SSL_Cert: 
-            Master_SSL_Cipher: 
-               Master_SSL_Key: 
-        Seconds_Behind_Master: NULL
-Master_SSL_Verify_Server_Cert: No
-                Last_IO_Errno: 0
-                Last_IO_Error: 
-               Last_SQL_Errno: 1049
-               Last_SQL_Error: Error 'Unknown database 'test'' on query. Default database: 'test'. Query: 'CREATE TABLE test_tb1 ( id int(11) primary key, name varchar(255) not null, sex tinyint(1) default 1 comment "1:男；0：女", age int(2) default 1 ) engine=innodb,charset=utf8'
-1 row in set (0.00 sec)
-```
-
+---------------
 
 #### 模拟数据检验主从复制是否成功
 
@@ -506,9 +462,9 @@ Query OK, 0 rows affected (0.00 sec)
 ```
 
 结果复制成功
->  Slave_IO_State: Waiting for master to send event
->  Slave_IO_Running: Yes
->  Slave_SQL_Running: Yes
+> Slave_IO_State: Waiting for master to send event   
+> Slave_IO_Running: Yes   
+> Slave_SQL_Running: Yes   
 
 ```
 
